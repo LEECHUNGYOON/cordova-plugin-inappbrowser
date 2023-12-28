@@ -100,6 +100,11 @@ public class InAppBrowser extends CordovaPlugin {
     private static final String LOAD_ERROR_EVENT = "loaderror";
     private static final String DOWNLOAD_EVENT = "download";
     private static final String MESSAGE_EVENT = "message";
+
+    // 2023-09-19 yoon : backbutton event 추가
+    private static final String BACK_BUTTON_EVENT = "backbutton";
+    // 2023-09-19 yoon : backbutton event 추가 -- END
+
     private static final String CLEAR_ALL_CACHE = "clearcache";
     private static final String CLEAR_SESSION_CACHE = "clearsessioncache";
     private static final String HARDWARE_BACK_BUTTON = "hardwareback";
@@ -516,6 +521,22 @@ public class InAppBrowser extends CordovaPlugin {
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetIntents.toArray(new Parcelable[] {}));
             this.cordova.getActivity().startActivity(chooser);
         }
+    }
+
+    /**
+     * 2023-09-19 yoon
+     * fire backbutton event
+     */
+    public void backbutton() {
+
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("type", BACK_BUTTON_EVENT);
+            sendUpdate(obj, true);
+        } catch (JSONException ex) {
+            LOG.e(LOG_TAG, "backbutton error");
+        }
+
     }
 
     /**
@@ -948,6 +969,14 @@ public class InAppBrowser extends CordovaPlugin {
                 settings.setJavaScriptCanOpenWindowsAutomatically(true);
                 settings.setBuiltInZoomControls(showZoomControls);
                 settings.setPluginState(android.webkit.WebSettings.PluginState.ON);
+
+                // 2023-12-12 yoon : 로컬 디렉토리의 html을 인앱으로 띄울수 있도록 설정
+                if (preferences.getBoolean("AndroidInsecureFileModeEnabled", false)) {
+                    LOG.d(LOG_TAG, "Enabled insecure file access");
+                    settings.setAllowFileAccess(true);
+                    settings.setAllowUniversalAccessFromFileURLs(true);
+                }
+                // 2023-12-12 yoon : 로컬 디렉토리의 html을 인앱으로 띄울수 있도록 설정 ------ END
                 
                 // download event
                 
@@ -986,6 +1015,13 @@ public class InAppBrowser extends CordovaPlugin {
                             LOG.e(LOG_TAG, "data object passed to postMessage has caused a JSON error.");
                         }
                     }
+
+                    // 2023-09-19 yoon: inappbrowser close 기능 추가                    
+                    @JavascriptInterface
+                    public void close(){
+                        closeDialog();
+                    }
+                    // 2023-09-19 yoon: inappbrowser close 기능 추가 --- END
                 }
 
                 settings.setMediaPlaybackRequiresUserGesture(mediaPlaybackRequiresUserGesture);
