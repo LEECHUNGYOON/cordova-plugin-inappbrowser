@@ -34,7 +34,10 @@
             exit: channel.create('exit'),
             customscheme: channel.create('customscheme'),
             message: channel.create('message'),
-            download: channel.create('download')
+            download: channel.create('download'),
+
+            // 2023-09-19 yoon: backbutton event 추가            
+            backbutton: channel.create('backbutton') 
         };
     }
 
