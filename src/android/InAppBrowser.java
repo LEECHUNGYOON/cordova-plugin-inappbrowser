@@ -1074,6 +1074,36 @@ public class InAppBrowser extends CordovaPlugin {
                         closeDialog();
                     }
                     // 2023-09-19 yoon: inappbrowser close 기능 추가 --- END
+
+                    // 2023-12-28 yoon: volume up/down event 관련 이벤트 전파 방지 설정
+                    @JavascriptInterface
+                    public void setPreventVolumeKeyEvent(String prevent){
+                        
+                        Boolean bIsPrevent = false;
+
+                        if(dialog == null){
+                            return;
+                        }
+
+                        switch(prevent){
+                            case "true":
+                                bIsPrevent = true;
+                                break;
+
+                            case "false":
+                                bIsPrevent = false;
+                                break;
+
+                            default:
+                                return;
+                        }
+                      
+                        dialog.setPreventVolumeKeyEvent(bIsPrevent);
+
+                    }
+                    // 2023-12-28 yoon: volume up/down event 관련 이벤트 전파 방지 설정 --- END
+
+
                 }
 
                 settings.setMediaPlaybackRequiresUserGesture(mediaPlaybackRequiresUserGesture);
