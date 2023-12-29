@@ -2,9 +2,9 @@
 
 ## 이벤트 추가 (Android)
 
-__backbutton__: device Back Button Event
-__volumeupbutton__: device Volumn up Event
-__volumedownbutton__: device Volumn down Event
+- __backbutton__: device Back Button Event.
+- __volumeupbutton__: device Volumn up Event.
+- __volumedownbutton__: device Volumn down Event.
 
 ### Example
     ref.addEventListener('backbutton', function(){});
