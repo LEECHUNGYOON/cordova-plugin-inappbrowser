@@ -15,9 +15,8 @@
 볼륨키 이벤트를 감지 할 경우, 디바이스 원래의 기능인 볼륨 키 눌렀을때의 소리 키우는 동작을 막으면서,
 해당 이벤트를 개발자가 핸들링 하고자 할 경우 사용.
 
-> InappBrowser 영역 내에서 실행
-> true: 이벤트 전파방지 (디바이스 고유 기능인 소리 키우는 동작 막음)
-> false: 이벤트 전파 (디바이스 고유 기능인 소리 키우는 동작함)
+__true__: 이벤트 전파방지 (디바이스 고유 기능인 소리 키우는 동작 막음).
+__false__: 이벤트 전파 (디바이스 고유 기능인 소리 키우는 동작함)
     webkit.messageHandlers.cordova_iab.setPreventVolumeKeyEvent(true);
     webkit.messageHandlers.cordova_iab.setPreventVolumeKeyEvent(false);
 
