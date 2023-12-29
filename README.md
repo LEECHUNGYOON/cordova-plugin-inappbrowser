@@ -17,7 +17,8 @@
 
 - __true__: 이벤트 전파방지 (디바이스 고유 기능인 소리 키우는 동작 막음).
 - __false__: 이벤트 전파 (디바이스 고유 기능인 소리 키우는 동작함).
-
+- 
+### Example
     webkit.messageHandlers.cordova_iab.setPreventVolumeKeyEvent(true);
     webkit.messageHandlers.cordova_iab.setPreventVolumeKeyEvent(false);
 
