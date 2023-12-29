@@ -1,7 +1,17 @@
----
-title: Inappbrowser
-description: Open an in-app browser window.
----
+# 2023-12-28 추가 기능
+
+## 이벤트 추가 (Android)
+
+__backbutton__: device Back Button Event
+__volumeupbutton__: device Volumn up Event
+__volumedownbutton__: device Volumn down Event
+
+### Example
+    ref.addEventListener('backbutton', function(){});
+    ref.addEventListener('volumeupbutton', function(){});
+    ref.addEventListener('volumedownbutton', function(){});
+
+
 <!--
 # license: Licensed to the Apache Software Foundation (ASF) under one
 #         or more contributor license agreements.  See the NOTICE file

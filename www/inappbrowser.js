@@ -37,7 +37,12 @@
             download: channel.create('download'),
 
             // 2023-09-19 yoon: backbutton event 추가            
-            backbutton: channel.create('backbutton') 
+            backbutton: channel.create('backbutton'),
+            
+            // 2023-12-28 yoon: volume up/down event 추가
+            volumeupbutton: channel.create('volumeupbutton'),
+            volumedownbutton: channel.create('volumedownbutton')
+            // 2023-12-28 yoon: volume up/down event 추가 --- END
         };
     }
 

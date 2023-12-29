@@ -105,6 +105,13 @@ public class InAppBrowser extends CordovaPlugin {
     private static final String BACK_BUTTON_EVENT = "backbutton";
     // 2023-09-19 yoon : backbutton event 추가 -- END
 
+    // 2023-12-28 yoon: volume up/down event 추가 관련 변수
+    private static final String VOLUME_UP = "VOLUME_UP";
+    private static final String VOLUME_DOWN = "VOLUME_DOWN";
+    private static final String VOLUME_UP_BUTTON_EVENT = "volumeupbutton";
+    private static final String VOLUME_DOWN_BUTTON_EVENT = "volumedownbutton";       
+    // 2023-12-28 yoon: volume up/down event 추가 관련 변수 --- END
+
     private static final String CLEAR_ALL_CACHE = "clearcache";
     private static final String CLEAR_SESSION_CACHE = "clearsessioncache";
     private static final String HARDWARE_BACK_BUTTON = "hardwareback";
@@ -536,6 +543,51 @@ public class InAppBrowser extends CordovaPlugin {
         } catch (JSONException ex) {
             LOG.e(LOG_TAG, "backbutton error");
         }
+
+    }
+
+    /**
+     * 2023-12-28 yoon: InappBrowser 상에서 Volume Up/Down 이벤트를 수신하기 위한 이벤트 감지 추가
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event){      
+
+        String EVENT_NAME = "";
+        String KEY_NAME = "";
+
+        switch(keyCode){
+           
+            case KeyEvent.KEYCODE_VOLUME_UP:
+
+                EVENT_NAME = VOLUME_UP_BUTTON_EVENT;
+                
+                KEY_NAME = VOLUME_UP;
+
+                break;
+
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+
+                EVENT_NAME = VOLUME_DOWN_BUTTON_EVENT;
+
+                KEY_NAME = VOLUME_DOWN;
+
+                break;
+            
+            default:
+
+                return false;
+
+        }
+
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("type", EVENT_NAME);
+            obj.put("key", KEY_NAME);
+            sendUpdate(obj, true);
+        } catch (JSONException ex) {
+            LOG.e(LOG_TAG, "volume Key error");
+        }
+
+        return true;
 
     }
 
